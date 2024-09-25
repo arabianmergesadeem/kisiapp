@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kisi API UI</title>
+</head>
+<body>
+    <h1>Kisi API Integration</h1>
+    <button onclick="getGroups()">Get Groups</button>
+    <div id="result"></div>
+
+    <script>
+        async function getGroups() {
+            try {
+                const response = await fetch('/api/groups');
+                if (response.ok) {
+                    const groups = await response.json();
+                    document.getElementById('result').innerHTML = JSON.stringify(groups, null, 2);
+                } else {
+                    document.getElementById('result').innerHTML = 'Failed to fetch groups.';
+                }
+            } catch (error) {
+                document.getElementById('result').innerHTML = `Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
